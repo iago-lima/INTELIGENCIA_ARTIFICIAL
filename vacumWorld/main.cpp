@@ -6,11 +6,12 @@ using namespace std;
 
 
 class Enviromment{
+public:
     bool isDurtyA;
     bool isDurtyB;
     bool agentLocation;
 
-public:
+
     Enviromment(bool _isDurtyA = true, bool _isDurtyB = true, bool _agentLocation = true) {
         this->isDurtyA = _isDurtyA;
         this->isDurtyB = _isDurtyB;
@@ -20,10 +21,10 @@ public:
 };
 
 class Perception{
+public:
     bool location;
     bool isDirty;
 
-public:
     Perception(bool _location = true, bool _isDirty = true){
         this->location = _location;
         this->isDirty = _isDirty;
@@ -31,8 +32,9 @@ public:
 };
 
 class Action{
-    string name;
 public:
+    string name;
+
     Action(string _name = ""){
         this->name = _name;
 
@@ -40,19 +42,20 @@ public:
 };
 
 class Agent{
+public:
     Perception perception;
     vector<Action> actions;
 
-public:
     Agent() {}
 };
 
 
 
 class TableDriveAgent : Agent{
+public:
     vector<Perception> perceptions;
     map<Perception*,Action*> table;
-public:
+
     TableDriveAgent(){}
 
     void setTable(){
@@ -61,9 +64,27 @@ public:
         this->table.insert(make_pair(new Perception(false,false), new Action("Esquerda")));
         this->table.insert(make_pair(new Perception(false,true), new Action("Aspirar")));
     }
+
+    Action selectAction(Perception _perception){
+        map<Perception*,Action*>::iterator it;
+        for (it = table.begin(); it != table.end(); it++) {
+            if((it->first->location == _perception.location) && (it->first->isDirty == _perception.isDirty)){
+                return *(it->second);
+            }
+
+        }
+        return Action("Erro");
+
+    }
 };
 
 int main(){
-    cout << "Hello World!" << endl;
-    return 0;
+    TableDriveAgent agent;
+    agent.setTable();
+
+    Perception b(false,false);
+    Action _return = agent.selectAction(b);
+
+    cout << _return.name << endl;
+
 }
