@@ -66,6 +66,9 @@ public:
     }
 
     Action selectAction(Perception _perception){
+
+        perceptions.push_back(perception);
+
         map<Perception*,Action*>::iterator it;
         for (it = table.begin(); it != table.end(); it++) {
             if((it->first->location == _perception.location) && (it->first->isDirty == _perception.isDirty)){
@@ -82,9 +85,15 @@ int main(){
     TableDriveAgent agent;
     agent.setTable();
 
+    Perception a(true,true);
     Perception b(false,false);
-    Action _return = agent.selectAction(b);
 
+    Action _return;
+    _return = agent.selectAction(a);
     cout << _return.name << endl;
+
+    _return = agent.selectAction(b);
+    cout << _return.name << endl;
+
 
 }
