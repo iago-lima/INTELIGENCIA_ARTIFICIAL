@@ -87,10 +87,10 @@ public:
 
 
 class TableDriveAgent : Agent{
-public:
     vector<Perception> perceptions;
     map<Perception*,Action*> table;
 
+public:
     TableDriveAgent(){}
 
     void setTable(){
@@ -132,6 +132,7 @@ int main(){
     cin >> location >> dirtyA >> dirtyB;
 
     Environment environment(location,dirtyA,dirtyB);
+
     agent.setTable();
 
 
