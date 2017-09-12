@@ -5,48 +5,83 @@
 using namespace std;
 
 
-class Enviromment{
+class Environment{
 public:
-    bool isDurtyA;
-    bool isDurtyB;
+    bool isdirtyA;
+    bool isdirtyB;
     bool agentLocation;
 
 
-    Enviromment(bool _isDurtyA = true, bool _isDurtyB = true, bool _agentLocation = true) {
-        this->isDurtyA = _isDurtyA;
-        this->isDurtyB = _isDurtyB;
+    Environment(bool _isdirtyA = true, bool _isdirtyB = true, bool _agentLocation = true) {
+        this->isdirtyA = _isdirtyA;
+        this->isdirtyB = _isdirtyB;
         this->agentLocation = _agentLocation;
     }
 
+    bool getdirtyA(){
+        return this->isdirtyA;
+    }
+
+    bool getdirtyB(){
+        return this->isdirtyB;
+    }
+
+    bool getAgentLocation(){
+        return this->agentLocation;
+    }
+    void setAgentLocation(bool location){
+        this->agentLocation = location;
+    }
+    void setdirtyA(bool dirtyA){
+        this->isdirtyA = dirtyA;
+    }
+    void setdirtyB(bool dirtyB){
+        this->isdirtyB = dirtyB;
+    }
 };
 
 class Perception{
-public:
     bool location;
     bool isDirty;
 
+public:
     Perception(bool _location = true, bool _isDirty = true){
         this->location = _location;
         this->isDirty = _isDirty;
     }
+    bool getLocation(){
+        return this->location;
+    }
+    bool getIsDirty(){
+        return this->isDirty;
+    }
+
 };
 
 class Action{
-public:
     string name;
 
+public:
     Action(string _name = ""){
         this->name = _name;
 
     }
+    string getName(){
+        return this->name;
+    }
 };
 
 class Agent{
-public:
+
     Perception perception;
     vector<Action> actions;
 
-    Agent() {}
+public:
+    Agent(){}
+
+    vector<Action> getActions(){
+        return this->actions;
+    }
 };
 
 
@@ -67,11 +102,11 @@ public:
 
     Action selectAction(Perception _perception){
 
-        perceptions.push_back(perception);
+        perceptions.push_back(_perception);
 
         map<Perception*,Action*>::iterator it;
         for (it = table.begin(); it != table.end(); it++) {
-            if((it->first->location == _perception.location) && (it->first->isDirty == _perception.isDirty)){
+            if((it->first->getLocation()== _perception.getLocation()) && (it->first->getIsDirty() == _perception.getIsDirty())){
                 return *(it->second);
             }
 
@@ -82,18 +117,43 @@ public:
 };
 
 int main(){
+
+
     TableDriveAgent agent;
+    Action action;
+
+    int n;
+    bool location,dirtyA, dirtyB;
+    bool isDirty;
+
+    cout << "number of times the agent should act" << endl;
+    cin >> n;
+    cout << "Location, dirtyA, dirtyB" << endl;
+    cin >> location >> dirtyA >> dirtyB;
+
+    Environment environment(location,dirtyA,dirtyB);
     agent.setTable();
 
-    Perception a(true,true);
-    Perception b(false,false);
 
-    Action _return;
-    _return = agent.selectAction(a);
-    cout << _return.name << endl;
+    for(int i = 0; i < n; i++){
+        cout << "Location: " << environment.getAgentLocation() << " isDurtyA: " << environment.getdirtyA()
+             << " isDurtyB: " << environment.getdirtyB() << endl;
 
-    _return = agent.selectAction(b);
-    cout << _return.name << endl;
+        environment.getAgentLocation() ? isDirty = environment.getdirtyA() : isDirty = environment.getdirtyB();
+        action = agent.selectAction(Perception(environment.getAgentLocation(), isDirty));
+
+        cout << "Action: " << action.getName() << endl;
+
+        if(action.getName() == "Aspirar"){
+            environment.getAgentLocation() ? environment.setdirtyA(0) : environment.setdirtyB(0);
+        }
+        if(action.getName() == "Esquerda"){
+            environment.setAgentLocation(1);
+        }
+        if(action.getName() == "Direita"){
+            environment.setAgentLocation(0);
+        }
+    }
 
 
 }
