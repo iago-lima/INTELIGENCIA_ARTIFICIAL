@@ -14,15 +14,6 @@
 
 using namespace std;
 
-class Comp{
-    bool reverse;
-public:
-    Comp(const bool& reverse = false);
-
-    bool operator() (Node& lhs, Node& rhs);
-};
-
-
 //Uniform cost search.
 class UniformCostSearch{
 public:

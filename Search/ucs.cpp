@@ -1,17 +1,5 @@
 #include "ucs.h"
 
-
-
-
-Comp::Comp(const bool &reverse){
-    this->reverse = reverse;
-}
-
-bool Comp::operator()(Node &lhs, Node &rhs){
-    if(reverse) return (lhs.getPathCost() > rhs.getPathCost());
-    else return (lhs.getPathCost() < rhs.getPathCost());
-}
-
 UniformCostSearch::UniformCostSearch(){}
 
 vector<Node> UniformCostSearch::UCS(State _origin, State _destiny, Graph graph){
