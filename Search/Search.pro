@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     node.cpp \
     action.cpp \
     dfs.cpp \
-    bfs.cpp
+    bfs.cpp \
+    custouniforme.cpp
 
 HEADERS += \
     grafo.h \
@@ -18,4 +19,5 @@ HEADERS += \
     action.h \
     dfs.h \
     enum.h \
-    bfs.h
+    bfs.h \
+    custouniforme.h

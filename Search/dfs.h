@@ -17,6 +17,11 @@ public:
     Deep_Search(){}
 
     vector<Node> DFS(State _origem, State _destino, Grafo grafo){
+        std::string CityName[] = {"ORADEA", "ZERIND", "ARAD", "TIMISOARA", "LUGOJ",
+                                   "MEHADIA", "DROBETA","SIBIU", "RVILCEA", "CRAIOVA",
+                                   "FAGARAS", "PITESTI", "BUCHAREST", "GIURGIU", "URZICENI",
+                                   "VASLUI", "IASI", "NEAMT", "HIRSOVA", "EFORIE", "TAM_MAPA"
+                                    };
         //int numVertices = 20; // Número de vertices
 
         //Inicializando no raiz do grafo
@@ -60,7 +65,7 @@ public:
             borda.pop();
             int localAtual = noInit.getStateNode().getState();
             if(!viewed[localAtual]){
-                cout << "Visitando " << localAtual << "..." << endl;
+                cout << "Visitando " << CityName[localAtual] << "..." << endl;
                 resp.push_back(noInit);
                 viewed[localAtual] = true;
             }

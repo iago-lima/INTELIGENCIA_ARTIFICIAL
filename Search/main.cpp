@@ -5,6 +5,7 @@
 #include "grafo.h"
 #include "dfs.h"
 #include "bfs.h"
+#include "custouniforme.h"
 //#include <utility> // Pra usar o make pair
 using namespace std;
 
@@ -40,18 +41,23 @@ void InitGrafo(Grafo& grafo){
 
 int main(){
 
-
-
-
     Grafo grafo;
     InitGrafo(grafo);
     Deep_Search dfs;
     Breadth_Search bfs;
+    UniformCostSearch custo;
     vector<Node> solucao;
     clock_t start, end;
     int c = 0;
 
-    while(true){
+    std::string CityName[] = {"ORADEA", "ZERIND", "ARAD", "TIMISOARA", "LUGOJ",
+                               "MEHADIA", "DROBETA","SIBIU", "RVILCEA", "CRAIOVA",
+                               "FAGARAS", "PITESTI", "BUCHAREST", "GIURGIU", "URZICENI",
+                               "VASLUI", "IASI", "NEAMT", "HIRSOVA", "EFORIE", "TAM_MAPA"
+                                };
+
+    while(true){                
+
         try{
         cout << " 1 - Busca em Profundidade     \n"
                 " 2 - Busca em Largura          \n"
@@ -68,7 +74,7 @@ int main(){
                 float time = (((end - start) * 1000.0) / CLOCKS_PER_SEC);
                 cout << "Solução: " << "[ ";
                 for(auto elemento : solucao){
-                    cout << elemento.getStateNode().getState() << " ";
+                    cout << CityName[elemento.getStateNode().getState()] << " ";
                 }
                 cout << "]" << endl << "Tempo de execução: " << time << endl << endl;
             }
@@ -81,14 +87,24 @@ int main(){
                 float time = (((end - start) * 1000.0) / CLOCKS_PER_SEC);
                 cout << "Solução: " << "[ ";
                 for(auto elemento : solucao){
-                    cout << elemento.getStateNode().getState() << " ";
+                    cout << CityName[elemento.getStateNode().getState()] << " ";
                 }
                 cout << "]" << endl << "Tempo de execução: " << time << endl << endl;
             }
 
-//            if(c == 3){
+            if(c == 3){
+                cout << "Busca em largura:" << endl;
+                start = clock();
+                solucao = custo.BFS(State(ARAD), State(BUCHAREST), grafo);
+                end = clock();
+                float time = (((end - start) * 1000.0) / CLOCKS_PER_SEC);
+                cout << "Solução: " << "[ ";
+                for(auto elemento : solucao){
+                    cout << CityName[elemento.getStateNode().getState()] << " ";
+                }
+                cout << "]" << endl << "Tempo de execução: " << time << endl << endl;
+            }
 
-//            }
         }catch(string e){
                 cout << e << endl;
         }

@@ -53,6 +53,17 @@ public:
     void setPai(Node *value){
         pai = value;
     }
+
+    bool operator==(Node& _node){
+        return this->custoDeCaminho == _node.getCustoDeCaminho();
+    }
+
+    struct OrdenarPorCusto{
+        bool operator()(Node& lhs, Node& rhs){
+            return lhs.getCustoDeCaminho() > rhs.getCustoDeCaminho();
+        }
+    };
+
 };
 
 

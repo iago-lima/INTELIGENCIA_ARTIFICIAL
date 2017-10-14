@@ -12,12 +12,20 @@
 #include "node.h"
 
 using namespace std;
+
 //Busca em largura.
 class Breadth_Search{
 public:
     Breadth_Search(){}
 
     vector<Node> BFS(State _origem, State _destino, Grafo grafo){
+
+        std::string CityName[] = {"ORADEA", "ZERIND", "ARAD", "TIMISOARA", "LUGOJ",
+                                   "MEHADIA", "DROBETA","SIBIU", "RVILCEA", "CRAIOVA",
+                                   "FAGARAS", "PITESTI", "BUCHAREST", "GIURGIU", "URZICENI",
+                                   "VASLUI", "IASI", "NEAMT", "HIRSOVA", "EFORIE", "TAM_MAPA"
+                                    };
+
 
         //Inicializando no raiz do grafo
         Node noInit;
@@ -60,7 +68,7 @@ public:
             borda.pop();
             int localAtual = noInit.getStateNode().getState();
             if(!viewed[localAtual]){
-                cout << "Visitando " << localAtual << "..." << endl;
+                cout << "Visitando " << CityName[localAtual] << "..." << endl;
                 resp.push_back(noInit);
                 viewed[localAtual] = true;
             }
