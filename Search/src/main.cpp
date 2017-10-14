@@ -90,9 +90,6 @@ int main(int argc, char *argv[]){
             origin = State(_originInt);
             destiny = State(_destinyInt);
 
-            cout << "Enter the origin" << endl;
-
-
             if(c == 1){
                 cout << "Search in Deep:" << endl;
                 start = clock();
