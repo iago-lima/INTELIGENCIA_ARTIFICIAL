@@ -10,57 +10,34 @@ using namespace std;
 
 class Node{
     State state;
-    float custoDeCaminho;
+    float pathCost;
     Action action;
 public:
-    Node * pai;
-    Node(){}
-    Node(State _state, Node* _pai, Action _action, float _custo){
-        state = _state;
-        pai = _pai;
-        action = _action;
-        custoDeCaminho = _custo;
-    }
+    Node * dad;
+    Node();
+    Node(State _state, Node* _dad, Action _action, float _cost);
 
-    State getStateNode(){
-        return state;
-    }
+    State getStateNode();
 
-    void setState(State value){
-        state = value;
-    }
+    void setState(State value);
 
-    float getCustoDeCaminho(){
-        return custoDeCaminho;
-    }
+    float getPathCost();
 
-    void setCustoDeCaminho(float value){
-        custoDeCaminho = value;
-    }
+    void setPathCost(float value);
 
-    Action getAction(){
-        return action;
-    }
+    Action getAction();
 
-    void setAction(Action value){
-        action = value;
-    }
+    void setAction(Action value);
 
-    Node& getPai(){
-        return *pai;
-    }
+    Node& getDad();
 
-    void setPai(Node *value){
-        pai = value;
-    }
+    void setDad(Node *value);
 
-    bool operator==(Node& _node){
-        return this->custoDeCaminho == _node.getCustoDeCaminho();
-    }
+    bool operator==(Node& _node);
 
-    struct OrdenarPorCusto{
+    struct SortByCost{
         bool operator()(Node& lhs, Node& rhs){
-            return lhs.getCustoDeCaminho() > rhs.getCustoDeCaminho();
+            return lhs.getPathCost() > rhs.getPathCost();
         }
     };
 

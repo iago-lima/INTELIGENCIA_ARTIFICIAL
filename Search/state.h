@@ -10,17 +10,11 @@ using namespace std;
 class State{
     int state;
   public:
-    State(){}
-    State(int _state){
-        state = _state;
-    }
+    State();
+    State(int _state);
 
-    int getState(){
-        return state;
-    }
-    void setState(int value){
-        state = value;
-    }
+    int getState();
+    void setState(int value);
 };
 
 #endif // STATE_H

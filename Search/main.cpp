@@ -2,51 +2,51 @@
 #include <vector>
 #include <string>
 #include <ctime>
-#include "grafo.h"
+#include "graph.h"
 #include "dfs.h"
 #include "bfs.h"
-#include "custouniforme.h"
+#include "ucs.h"
 //#include <utility> // Pra usar o make pair
 using namespace std;
 
-void InitGrafo(Grafo& grafo){
+void InitGrafo(Graph& grafo){
     for(int i = 0; i < 20; i++)
         for(int j = 0; j < 20; j++)
-            grafo.addPonto(i, j, 0);
+            grafo.addPoint(i, j, 0);
 
-    grafo.addPonto(ORADEA, ZERIND, 71);
-    grafo.addPonto(ORADEA, SIBIU, 151);
-    grafo.addPonto(ZERIND, ARAD, 75);
-    grafo.addPonto(ARAD, SIBIU, 140);
-    grafo.addPonto(ARAD, TIMISOARA, 118);
-    grafo.addPonto(TIMISOARA, LUGOJ, 111);
-    grafo.addPonto(LUGOJ, MEHADIA, 70);
-    grafo.addPonto(MEHADIA, DROBETA, 75);
-    grafo.addPonto(DROBETA, CRAIOVA, 120);
-    grafo.addPonto(SIBIU, FAGARAS, 99);
-    grafo.addPonto(SIBIU, RVILCEA, 80);
-    grafo.addPonto(RVILCEA, PITESTI, 97);
-    grafo.addPonto(RVILCEA, CRAIOVA, 146);
-    grafo.addPonto(CRAIOVA, PITESTI, 138);
-    grafo.addPonto(FAGARAS, BUCHAREST, 211);
-    grafo.addPonto(PITESTI, BUCHAREST, 101);
-    grafo.addPonto(BUCHAREST, GIURGIU, 90);
-    grafo.addPonto(BUCHAREST, URZICENI, 85);
-    grafo.addPonto(URZICENI, HIRSOVA, 98);
-    grafo.addPonto(URZICENI, VASLUI, 142);
-    grafo.addPonto(HIRSOVA, EFORIE, 86);
-    grafo.addPonto(VASLUI, IASI, 92);
-    grafo.addPonto(IASI, NEAMT, 87);
+    grafo.addPoint(ORADEA, ZERIND, 71);
+    grafo.addPoint(ORADEA, SIBIU, 151);
+    grafo.addPoint(ZERIND, ARAD, 75);
+    grafo.addPoint(ARAD, SIBIU, 140);
+    grafo.addPoint(ARAD, TIMISOARA, 118);
+    grafo.addPoint(TIMISOARA, LUGOJ, 111);
+    grafo.addPoint(LUGOJ, MEHADIA, 70);
+    grafo.addPoint(MEHADIA, DROBETA, 75);
+    grafo.addPoint(DROBETA, CRAIOVA, 120);
+    grafo.addPoint(SIBIU, FAGARAS, 99);
+    grafo.addPoint(SIBIU, RVILCEA, 80);
+    grafo.addPoint(RVILCEA, PITESTI, 97);
+    grafo.addPoint(RVILCEA, CRAIOVA, 146);
+    grafo.addPoint(CRAIOVA, PITESTI, 138);
+    grafo.addPoint(FAGARAS, BUCHAREST, 211);
+    grafo.addPoint(PITESTI, BUCHAREST, 101);
+    grafo.addPoint(BUCHAREST, GIURGIU, 90);
+    grafo.addPoint(BUCHAREST, URZICENI, 85);
+    grafo.addPoint(URZICENI, HIRSOVA, 98);
+    grafo.addPoint(URZICENI, VASLUI, 142);
+    grafo.addPoint(HIRSOVA, EFORIE, 86);
+    grafo.addPoint(VASLUI, IASI, 92);
+    grafo.addPoint(IASI, NEAMT, 87);
 }
 
 int main(){
 
-    Grafo grafo;
-    InitGrafo(grafo);
+    Graph graph;
+    InitGrafo(graph);
     Deep_Search dfs;
-    Breadth_Search bfs;
+    Width_Search bfs;
     UniformCostSearch custo;
-    vector<Node> solucao;
+    vector<Node> solution;
     clock_t start, end;
     int c = 0;
 
@@ -59,50 +59,51 @@ int main(){
     while(true){                
 
         try{
-        cout << " 1 - Busca em Profundidade     \n"
-                " 2 - Busca em Largura          \n"
-                " 3 - Busca por custo uniforme  \n"
-             << endl << "(opção): ";
+        cout << " 1 - Search in Deep \n"
+                " 2 - Search in Width \n"
+                " 3 - Uniform Cost Search \n"
+             << endl << "(option): ";
 
             cin >> c;
 
             if(c == 1){
-                cout << "Busca em profundidade:" << endl;
+                cout << "Search in Deep:" << endl;
                 start = clock();
-                solucao = dfs.DFS(State(ARAD), State(BUCHAREST), grafo);
+                solution = dfs.DFS(State(ARAD), State(BUCHAREST), graph);
                 end = clock();
                 float time = (((end - start) * 1000.0) / CLOCKS_PER_SEC);
-                cout << "Solução: " << "[ ";
-                for(auto elemento : solucao){
-                    cout << CityName[elemento.getStateNode().getState()] << " ";
+                cout << "Solution: " << "[ ";
+                for(auto element : solution){
+                    cout << CityName[element.getStateNode().getState()] << " ";
                 }
-                cout << "]" << endl << "Tempo de execução: " << time << endl << endl;
+                cout << "]" << endl << "Runtime: " << time << "ms" << endl << endl;
             }
 
             if(c == 2){
-                cout << "Busca em largura:" << endl;
+                cout << "Search in Width:" << endl;
                 start = clock();
-                solucao = bfs.BFS(State(ARAD), State(BUCHAREST), grafo);
+                solution = bfs.BFS(State(ARAD), State(BUCHAREST), graph);
                 end = clock();
                 float time = (((end - start) * 1000.0) / CLOCKS_PER_SEC);
-                cout << "Solução: " << "[ ";
-                for(auto elemento : solucao){
-                    cout << CityName[elemento.getStateNode().getState()] << " ";
+                cout << "Solution: " << "[ ";
+                for(auto element : solution){
+                    cout << CityName[element.getStateNode().getState()] << " ";
                 }
-                cout << "]" << endl << "Tempo de execução: " << time << endl << endl;
+                cout << "]" << endl << "Runtime: " << time << "ms" << endl << endl;
             }
 
             if(c == 3){
-                cout << "Busca em largura:" << endl;
+                cout << "Uniform Cost Search:" << endl;
                 start = clock();
-                solucao = custo.BFS(State(ARAD), State(BUCHAREST), grafo);
+                solution = custo.UCS(State(ARAD), State(BUCHAREST), graph);
                 end = clock();
                 float time = (((end - start) * 1000.0) / CLOCKS_PER_SEC);
-                cout << "Solução: " << "[ ";
-                for(auto elemento : solucao){
-                    cout << CityName[elemento.getStateNode().getState()] << " ";
+                cout << "Solution: " << "[ ";
+                for(auto element : solution){
+                    cout << CityName[element.getStateNode().getState()] << " ";
                 }
-                cout << "]" << endl << "Tempo de execução: " << time << endl << endl;
+                cout << "]" << endl << "Runtime: " << time << "ms"
+                                                              "" << endl << endl;
             }
 
         }catch(string e){

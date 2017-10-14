@@ -4,20 +4,20 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    grafo.cpp \
     state.cpp \
     node.cpp \
     action.cpp \
     dfs.cpp \
     bfs.cpp \
-    custouniforme.cpp
+    ucs.cpp \
+    graph.cpp
 
 HEADERS += \
-    grafo.h \
     state.h \
     node.h \
     action.h \
     dfs.h \
     enum.h \
     bfs.h \
-    custouniforme.h
+    ucs.h \
+    graph.h
