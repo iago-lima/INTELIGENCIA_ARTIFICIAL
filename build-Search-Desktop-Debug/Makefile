@@ -49,21 +49,23 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../Search/main.cpp \
-		../Search/grafo.cpp \
 		../Search/state.cpp \
 		../Search/node.cpp \
 		../Search/action.cpp \
 		../Search/dfs.cpp \
 		../Search/bfs.cpp \
-		../Search/custouniforme.cpp 
+		../Search/ucs.cpp \
+		../Search/graph.cpp \
+		../Search/inputcmd.cpp 
 OBJECTS       = main.o \
-		grafo.o \
 		state.o \
 		node.o \
 		action.o \
 		dfs.o \
 		bfs.o \
-		custouniforme.o
+		ucs.o \
+		graph.o \
+		inputcmd.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -120,21 +122,23 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../Search/Search.pro grafo.h \
-		state.h \
+		../Search/Search.pro state.h \
 		node.h \
 		action.h \
 		dfs.h \
 		enum.h \
 		bfs.h \
-		custouniforme.h ../Search/main.cpp \
-		../Search/grafo.cpp \
+		ucs.h \
+		graph.h \
+		inputcmd.h ../Search/main.cpp \
 		../Search/state.cpp \
 		../Search/node.cpp \
 		../Search/action.cpp \
 		../Search/dfs.cpp \
 		../Search/bfs.cpp \
-		../Search/custouniforme.cpp
+		../Search/ucs.cpp \
+		../Search/graph.cpp \
+		../Search/inputcmd.cpp
 QMAKE_TARGET  = Search
 DESTDIR       = 
 TARGET        = Search
@@ -304,19 +308,16 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../Search/main.cpp ../Search/grafo.h \
+main.o: ../Search/main.cpp ../Search/graph.h \
 		../Search/enum.h \
 		../Search/dfs.h \
 		../Search/state.h \
 		../Search/node.h \
 		../Search/action.h \
 		../Search/bfs.h \
-		../Search/custouniforme.h
+		../Search/ucs.h \
+		../Search/inputcmd.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Search/main.cpp
-
-grafo.o: ../Search/grafo.cpp ../Search/grafo.h \
-		../Search/enum.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o grafo.o ../Search/grafo.cpp
 
 state.o: ../Search/state.cpp ../Search/state.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o state.o ../Search/state.cpp
@@ -332,7 +333,7 @@ action.o: ../Search/action.cpp ../Search/action.h \
 
 dfs.o: ../Search/dfs.cpp ../Search/dfs.h \
 		../Search/enum.h \
-		../Search/grafo.h \
+		../Search/graph.h \
 		../Search/state.h \
 		../Search/node.h \
 		../Search/action.h
@@ -340,19 +341,26 @@ dfs.o: ../Search/dfs.cpp ../Search/dfs.h \
 
 bfs.o: ../Search/bfs.cpp ../Search/bfs.h \
 		../Search/enum.h \
-		../Search/grafo.h \
+		../Search/graph.h \
 		../Search/state.h \
 		../Search/node.h \
 		../Search/action.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bfs.o ../Search/bfs.cpp
 
-custouniforme.o: ../Search/custouniforme.cpp ../Search/custouniforme.h \
+ucs.o: ../Search/ucs.cpp ../Search/ucs.h \
 		../Search/enum.h \
-		../Search/grafo.h \
+		../Search/graph.h \
 		../Search/state.h \
 		../Search/node.h \
 		../Search/action.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o custouniforme.o ../Search/custouniforme.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ucs.o ../Search/ucs.cpp
+
+graph.o: ../Search/graph.cpp ../Search/graph.h \
+		../Search/enum.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o graph.o ../Search/graph.cpp
+
+inputcmd.o: ../Search/inputcmd.cpp ../Search/inputcmd.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o inputcmd.o ../Search/inputcmd.cpp
 
 ####### Install
 

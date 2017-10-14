@@ -40,7 +40,12 @@ void InitGrafo(Graph& grafo){
     grafo.addPoint(IASI, NEAMT, 87);
 }
 
-int main(){
+int main(int argc, char *argv[]){
+
+  if(argc != 4){
+    cout << "Please enter all the arguments." << endl;
+    return -1;
+  }
 
     Graph graph;
     InitGrafo(graph);
@@ -57,31 +62,30 @@ int main(){
     State origin;
     State destiny;
 
-    std::string CityName[] = {"ORADEA", "ZERIND", "ARAD", "TIMISOARA", "LUGOJ",
+            std::string CityName[] = {"ORADEA", "ZERIND", "ARAD", "TIMISOARA", "LUGOJ",
                                "MEHADIA", "DROBETA","SIBIU", "RVILCEA", "CRAIOVA",
                                "FAGARAS", "PITESTI", "BUCHAREST", "GIURGIU", "URZICENI",
                                "VASLUI", "IASI", "NEAMT", "HIRSOVA", "EFORIE", "TAM_MAPA"
                                 };
 
-    while(true){                
+            string str = argv[1];
+            for(int i=0; i< (int) str.size(); i++){
+              str[i] = toupper(str[i]); //Convert all letters of the word to UPPERCASE
+            }
 
-        try{
-        cout << "Options \n"
-                " 1 - Search in Deep \n"
-                " 2 - Search in Width \n"
-                " 3 - Uniform Cost Search \n"
-             << endl << "(option): ";
+            if(str == "DFS")
+              c = 1;
+            else if(str == "BFS")
+              c = 2;
+            else if(str == "UCS")
+              c = 3;
+            else{
+              cout << "Please, enter a valid argument." << endl;
+              return -1;
+            }
 
-            cin >> c;
-
-            cout << "Enter the origin: " << endl;
-            cin >> _origin;
-
-            cout << "Enter the destiny: " << endl;
-            cin >> _destiny;
-
-            _originInt = inputCMD(_origin);
-            _destinyInt = inputCMD(_destiny);
+            _originInt = inputCMD(argv[2]);
+            _destinyInt = inputCMD(argv[3]);
 
             origin = State(_originInt);
             destiny = State(_destinyInt);
@@ -128,11 +132,6 @@ int main(){
                 cout << "]" << endl << "Runtime: " << time << "ms"
                                                               "" << endl << endl;
             }
-
-        }catch(string e){
-                cout << e << endl;
-        }
-    }
 
 
 
