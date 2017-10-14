@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     dfs.cpp \
     bfs.cpp \
     ucs.cpp \
-    graph.cpp
+    graph.cpp \
+    inputcmd.cpp
 
 HEADERS += \
     state.h \
@@ -20,4 +21,5 @@ HEADERS += \
     enum.h \
     bfs.h \
     ucs.h \
-    graph.h
+    graph.h \
+    inputcmd.h

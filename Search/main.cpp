@@ -6,6 +6,7 @@
 #include "dfs.h"
 #include "bfs.h"
 #include "ucs.h"
+#include "inputcmd.h"
 //#include <utility> // Pra usar o make pair
 using namespace std;
 
@@ -49,6 +50,12 @@ int main(){
     vector<Node> solution;
     clock_t start, end;
     int c = 0;
+    int _originInt;
+    int _destinyInt;
+    string _origin;
+    string _destiny;
+    State origin;
+    State destiny;
 
     std::string CityName[] = {"ORADEA", "ZERIND", "ARAD", "TIMISOARA", "LUGOJ",
                                "MEHADIA", "DROBETA","SIBIU", "RVILCEA", "CRAIOVA",
@@ -59,17 +66,33 @@ int main(){
     while(true){                
 
         try{
-        cout << " 1 - Search in Deep \n"
+        cout << "Options \n"
+                " 1 - Search in Deep \n"
                 " 2 - Search in Width \n"
                 " 3 - Uniform Cost Search \n"
              << endl << "(option): ";
 
             cin >> c;
 
+            cout << "Enter the origin: " << endl;
+            cin >> _origin;
+
+            cout << "Enter the destiny: " << endl;
+            cin >> _destiny;
+
+            _originInt = inputCMD(_origin);
+            _destinyInt = inputCMD(_destiny);
+
+            origin = State(_originInt);
+            destiny = State(_destinyInt);
+
+            cout << "Enter the origin" << endl;
+
+
             if(c == 1){
                 cout << "Search in Deep:" << endl;
                 start = clock();
-                solution = dfs.DFS(State(ARAD), State(BUCHAREST), graph);
+                solution = dfs.DFS(origin,destiny, graph);
                 end = clock();
                 float time = (((end - start) * 1000.0) / CLOCKS_PER_SEC);
                 cout << "Solution: " << "[ ";
@@ -82,7 +105,7 @@ int main(){
             if(c == 2){
                 cout << "Search in Width:" << endl;
                 start = clock();
-                solution = bfs.BFS(State(ARAD), State(BUCHAREST), graph);
+                solution = bfs.BFS(origin, destiny, graph);
                 end = clock();
                 float time = (((end - start) * 1000.0) / CLOCKS_PER_SEC);
                 cout << "Solution: " << "[ ";
@@ -95,7 +118,7 @@ int main(){
             if(c == 3){
                 cout << "Uniform Cost Search:" << endl;
                 start = clock();
-                solution = custo.UCS(State(ARAD), State(BUCHAREST), graph);
+                solution = custo.UCS(origin, destiny, graph);
                 end = clock();
                 float time = (((end - start) * 1000.0) / CLOCKS_PER_SEC);
                 cout << "Solution: " << "[ ";
