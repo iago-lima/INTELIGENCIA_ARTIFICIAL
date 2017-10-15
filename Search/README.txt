@@ -2,7 +2,7 @@ Para executar o programa siga os passos:
 1 - Abra o terminal e entre na pasta do arquivo
 2 - Execute o comando make
 3 - entre na pasta bin 
-4 - execute o aplicativo "app" com os seguintes parametro
+4 - execute o aplicativo "app" com os seguintes parâmetro
 	4.1 - ./app tipo_de_busca origem destino
 PS.: Tipo de buscas:
 	* bfs (Busca em largura)
